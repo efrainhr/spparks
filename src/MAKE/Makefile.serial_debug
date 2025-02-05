@@ -1,4 +1,4 @@
-# serial_debug = RedHat Linux box, g++, no MPI, run valgrind 
+# serial_debug = RedHat Linux box, g++, no MPI, -g enabled
 
 SHELL = /bin/sh
 
@@ -7,12 +7,12 @@ SHELL = /bin/sh
 # specify flags and libraries needed for your compiler
 
 CC =		g++
-CCFLAGS =	-g -O -std=c++11
+CCFLAGS =	-g -O -std=c++17
 SHFLAGS =	-fPIC
 DEPFLAGS =	-M
 
 LINK =		g++
-LINKFLAGS =	-g
+LINKFLAGS =	-g -O
 LIB =	  	
 SIZE =		size
 

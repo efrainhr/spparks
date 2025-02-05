@@ -1,6 +1,6 @@
-"SPPARKS WWW Site"_sws - "SPPARKS Documentation"_sd - "SPPARKS Commands"_sc :c
+"SPPARKS Website"_sws - "SPPARKS Documentation"_sd - "SPPARKS Commands"_sc :c
 
-:link(sws,http://spparks.sandia.gov)
+:link(sws,https://spparks.github.io)
 :link(sd,Manual.html)
 :link(sc,Section_commands.html#comm)
 
@@ -93,7 +93,10 @@ See "sweep"_sweep.html for more information.
 
 [Additional related commands:] 
 
-"app_style potts"_app_potts.html, "app_style potts/grad"_app_potts_grad.html,
-"app_style potts/additive"_app_potts_additive.html, "app_style potts/weld"_app_potts_weld.html,
+"app_style potts"_app_potts.html, "app_style
+potts/grad"_app_potts_grad.html, "app_style
+am/ellipsoid"_app_am_ellipsoid.html, "app_style
+potts/weld"_app_potts_weld.html
 
-[Default:] 
+[Default:] none
+

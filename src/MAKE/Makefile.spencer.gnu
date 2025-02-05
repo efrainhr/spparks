@@ -1,4 +1,4 @@
-# g++ = RedHat Linux box, g++, MPICH
+# spencer.gnu: uses MPI_HOME env var path for mpi compiler, enables Stitch
 
 SHELL = /bin/sh
 
@@ -7,7 +7,8 @@ SHELL = /bin/sh
 # specify flags and libraries needed for your compiler
 
 CC =		${MPI_HOME}/bin/mpicxx
-CCFLAGS =	-g -O -std=c++11
+C =		${MPI_HOME}/bin/mpicc
+CCFLAGS =	-g -O -std=c++17
 SHFLAGS =	-fPIC
 DEPFLAGS =	-M
 
@@ -27,9 +28,9 @@ SHLIBFLAGS =	-shared
 # SPPARKS ifdef options, see doc/Section_start.html
 
 SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG -DSPPARKS_BIGBIG
-SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG -DSTITCH_PARALLEL
 SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG 
 SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG -DSPPARKS_MAP
+SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG -DSPPARKS_UNORDERED_MAP -DLOG_STITCH
 SPK_INC =	-DSPPARKS_GZIP  -DSPPARKS_JPEG -DSPPARKS_UNORDERED_MAP
 
 # MPI library, can be src/STUBS dummy lib
@@ -104,6 +105,6 @@ depend : fastdep.exe $(SRC)
 	@./fastdep.exe $(EXTRA_INC) -- $^ > .depend || exit 1
 
 fastdep.exe: ../DEPEND/fastdep.c
-	cc -O -o $@ $<
+	$(C) -O -o $@ $<
 
 sinclude .depend

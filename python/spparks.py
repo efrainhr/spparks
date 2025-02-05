@@ -21,14 +21,14 @@ class spparks:
 
     # load libspparks.so by default
     # if name = "g++", load libspparks_g++.so
-    
+
     try:
       if not name: self.lib = CDLL("libspparks.so",RTLD_GLOBAL)
       else: self.lib = CDLL("libspparks_%s.so" % name,RTLD_GLOBAL)
     except:
       type,value,tb = sys.exc_info()
       traceback.print_exception(type,value,tb)
-      raise OSError,"Could not load SPPARKS dynamic library"
+      raise Exception("Could not load SPPARKS dynamic library")
 
     # create an instance of SPPARKS
     # don't know how to pass an MPI communicator from PyPar
@@ -55,12 +55,15 @@ class spparks:
     self.spk = None
 
   def file(self,file):
+    file = file.encode('utf-8')
     self.lib.spparks_file(self.spk,file)
 
-  def command(self,cmd):
+  def command(self,cmd): 
+    cmd = cmd.encode('utf-8')
     self.lib.spparks_command(self.spk,cmd)
 
   def extract(self,name,type):
+    name = name.encode('utf-8')
     if type == 0:
       self.lib.spparks_extract.restype = POINTER(c_int)
       ptr = self.lib.spparks_extract(self.spk,name)
