@@ -40,12 +40,11 @@ protected:
  private:
   class AppSinter *appsinter;
   int nlocal;
-  double interfacialFE;
-  bool init_flag;
+  double interfacialFE, window;
 	
-  int xstart_, xend_;
-  int ystart_, yend_;
-  int zstart_, zend_;
+  int xstart_, xend_, nx;
+  int ystart_, yend_, ny;
+  int zstart_, zend_, nz;
 };
 
 }

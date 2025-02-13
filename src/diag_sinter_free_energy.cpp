@@ -41,7 +41,6 @@ void DiagSinterFreeEnergy::init()
 {
   appsinter = (AppSinter *) app;
   nlocal = appsinter->nlocal;
-//  density = 0.0;
   interfacialFE = 0.0;
 }
 
@@ -49,7 +48,6 @@ void DiagSinterFreeEnergy::init()
 
 void DiagSinterFreeEnergy::compute()
 {
-//  appsinter->comm->all();
   int *spin = appsinter->spin;
   int *numneigh = appsinter->numneigh;
   int **neighbor = appsinter->neighbor;
@@ -58,17 +56,17 @@ void DiagSinterFreeEnergy::compute()
 
   double interfacialFEtmp = 0.0;
   for (int i = 0; i < nlocal; i++) {
-	int ispin = spin[i];
-	double surface = 0;
-	if ( ispin > VACANT ) { // If I am a grain site add the number of neighbors that are pore sites
-		for (int j = 0; j < numneigh[i]; j++)
-			if (spin[neighbor[i][j]] == VACANT) surface++;
-	}		
-	interfacialFEtmp += surface;
-	//interfacialFEtmp += appsinter->site_surface(i);
+	  int ispin = spin[i];
+	  double surface = 0;
+
+ 	  // If I am a grain site add the number of neighbors that are pore sites
+	  if ( ispin > VACANT ) {
+		  for (int j = 0; j < numneigh[i]; j++)
+			  if (spin[neighbor[i][j]] == VACANT) surface++;
+	  }
+	  interfacialFEtmp += surface;
   }
   MPI_Allreduce(&interfacialFEtmp,&interfacialFE,1,MPI_DOUBLE,MPI_SUM,world);
-//  density = appsinter->calculate_density();	
 }
 
 /* ---------------------------------------------------------------------- */
@@ -82,6 +80,5 @@ void DiagSinterFreeEnergy::stats(char *strtmp)
 
 void DiagSinterFreeEnergy::stats_header(char *strtmp)
 {
-//  sprintf(strtmp," %10s %10s","Density", "InterfFE");
   sprintf(strtmp," %10s", "InterfFE");
 }

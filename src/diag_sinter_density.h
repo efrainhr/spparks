@@ -40,11 +40,11 @@ class DiagSinterDensity : public Diag {
  private:
   class AppSinter *appsinter;
   int nlocal;
-  double density;
+  double density, window;
   
-  int xstart_density, xend_density;
-  int ystart_density, yend_density;
-  int zstart_density, zend_density;
+  int xstart_density, xend_density, nx;
+  int ystart_density, yend_density, ny;
+  int zstart_density, zend_density, nz;
 };
 
 }

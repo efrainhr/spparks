@@ -12,23 +12,22 @@
 ------------------------------------------------------------------------- */
 
 #ifdef DIAG_CLASS
-DiagStyle(sinter_free_energy,DiagSinterFreeEnergy)
+DiagStyle(sinter_pore_curvature,DiagSinterPoreCurvature)
 
 #else
 
-#ifndef SPK_DIAG_SINTER_FREE_ENERGY_H
-#define SPK_DIAG_SINTER_FREE_ENERGY_H
+#ifndef SPK_DIAG_SINTER_PORE_CURVATURE_H
+#define SPK_DIAG_SINTER_PORE_CURVATURE_H
 
 #include "stdio.h"
 #include "diag.h"
 
 namespace SPPARKS_NS {
 
-class DiagSinterFreeEnergy : public Diag {
-
+class DiagSinterPoreCurvature : public Diag {
  public:
-  DiagSinterFreeEnergy(class SPPARKS *, int, char **);
-  ~DiagSinterFreeEnergy() {}
+  DiagSinterPoreCurvature(class SPPARKS *, int, char **);
+  ~DiagSinterPoreCurvature() {}
   void init();
   void compute();
   void stats(char *);
@@ -36,8 +35,17 @@ class DiagSinterFreeEnergy : public Diag {
 
  private:
   class AppSinter *appsinter;
-  int nlocal;
-  double interfacialFE;
+  double poreCurvature;
+  double tripleJunction;	
+  double window;
+  int **edgeneigh, *faceneigh, surfaceArea;
+  void initialize_parameters_calculation();	
+
+	int dimension;
+
+  int xstart_, xend_, nx;
+  int ystart_, yend_, ny;
+  int zstart_, zend_, nz;
 };
 
 }
